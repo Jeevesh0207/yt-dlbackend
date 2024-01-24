@@ -3,6 +3,8 @@ const ytdl = require('ytdl-core')
 const YT=express.Router()
 
 YT.post('/',async(req,res)=>{
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     const ID=req.body.ID
     const Data={
         title:"",
@@ -37,7 +39,7 @@ YT.post('/',async(req,res)=>{
     Data.videoformats.sort((a, b) => b.contentLength - a.contentLength);
     Data.audioformats.sort((a, b) => b.contentLength - a.contentLength);
     res.send(Data)
-    res.end()
+    // res.end()
 })
 
 module.exports=YT
