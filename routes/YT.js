@@ -2,6 +2,10 @@ const express=require('express')
 const ytdl = require('ytdl-core')
 const YT=express.Router()
 
+
+    
+
+
 YT.post('/',async(req,res)=>{
     const URL=req.body.URL
     const Data={
@@ -12,7 +16,8 @@ YT.post('/',async(req,res)=>{
         audioformats:[],
         defaultaudio:"",
     }
-    const ID = ytdl.getVideoID(URL);
+    const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+    const ID=URL.match(rx)[1]
     const info=await ytdl.getInfo(ID)
     const Title=info.videoDetails.title
     const Thumbnail=info.videoDetails.thumbnails
