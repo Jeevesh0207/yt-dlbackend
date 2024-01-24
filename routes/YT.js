@@ -2,10 +2,6 @@ const express=require('express')
 const ytdl = require('ytdl-core')
 const YT=express.Router()
 
-
-    
-
-
 YT.post('/',async(req,res)=>{
     const ID=req.body.ID
     const Data={
