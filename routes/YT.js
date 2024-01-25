@@ -3,8 +3,12 @@ const ytdl = require('ytdl-core')
 const YT = express.Router()
 
 YT.post('/', async (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
+
     const URL = req.body.URL
     const Data = {
         title: "",
@@ -22,7 +26,7 @@ YT.post('/', async (req, res) => {
         const matches = URL.match(regex);
         ID = (matches ? matches[5] : null);
     }
-    if(ID===null) {
+    if (ID === null) {
         res.send("ERROR")
         res.end()
     }
